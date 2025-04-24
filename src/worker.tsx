@@ -1,5 +1,5 @@
 import { defineApp, ErrorResponse } from "@redwoodjs/sdk/worker";
-import { route, render, prefix } from "@redwoodjs/sdk/router";
+import { route, render, prefix, index } from "@redwoodjs/sdk/router";
 import { Document } from "@/app/Document";
 import { setCommonHeaders } from "@/app/headers";
 import { sessions, setupSessionStore } from "./session/store";
@@ -74,14 +74,16 @@ export default defineApp([
   },
   render(Document, [
     // marketing
-    route("/", () => new Response("Hello, World!")),
+    index(() => new Response("Hello, World!")),
 
     // admin - password protected
-    route("/admin", () => new Response(null, { status: 302, headers: { Location: "/admin/dashboard" } })),
-    route("/admin/dashboard", [DashboardPage]),
-    route("/admin/contacts", [ContactsListPage]),
-    route("/admin/contacts/:id", [ContactsDetailsPage]),
-    route("/admin/messages", [MessagesListPage]),
+    prefix("/admin", [
+      index(() => new Response(null, { status: 302, headers: { Location: "/admin/dashboard" } })),
+      route("/dashboard", [DashboardPage]),
+      route("/contacts", [ContactsListPage]),
+      route("/contacts/:id", [ContactsDetailsPage]),
+      route("/messages", [MessagesListPage]),
+    ]),
 
     // individual form page - not password protected
     route("/:id", [FormPage]),
