@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap');
+
+
+@import "tailwindcss";
+
+@theme {
+  --color-tiffany-blue: #02baad;
+  --color-han-purple: #3f16d3;
+  --color-medium-slate-blue: #8365f0;
+  --color-sezerac: #ffefe2;
+  /* background: light peach color */
+  --color-peach-puff: #ffd7ba;
+  --color-unbleached-silk: #ffe0c8;
+  --color-lumber: #ffe3ce;
+  --color-sea-shell: #fff6ee;
+  --color-coral-red: #fe4345;
+  --color-fair-pink: #ffedef;
+  --color-selago: #ebdbe5;
+  /* light purple */
+  --color-classic-rose: #f3c4da;
+
+  --font-display: 'Rubik', sans-serif;
+  --font-body: 'Schibsted Grotesk', sans-serif;
+
+  --spacing-page: 32px;
+}
+
+@utility center {
+  @apply flex items-center justify-center;
+}
+
+@utility z-dots {
+  @apply z-[9000];
+}
+
+@utility z-menu {
+  @apply z-[9005];
+}
+
+@utility z-overlay {
+  @apply z-[99990];
+}
+
+@utility z-modal {
+  @apply z-[99999];
+}
+
+@utility action-buttons {
+  @apply flex items-center gap-3;
+}
+
+@utility card {
+  @apply rounded-3xl py-6 px-8;
+}
+
+@utility page-grid {
+  @apply grid grid-cols-12 gap-5;
+}
+
+@layer base, component, page;
+
+@layer base {
+
+  html,
+  body {
+    @apply font-body bg-sezerac;
+  }
+
+  label {
+    @apply font-bold block mb-2 text-han-purple;
+  }
+
+  input[type="search"],
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"] {
+    @apply border-[3px] border-han-purple h-[72px] px-5 w-full font-body font-bold text-han-purple;
+  }
+
+  input[type="tel"].dashed,
+  input[type="number"].dashed,
+  input[type="text"].dashed {
+    @apply border-t-0 border-x-0 border-b-2 border-han-purple border-dotted hover:outline-none focus:outline-none;
+  }
+
+  select.no-outline,
+  input[type="text"].no-outline {
+    @apply bg-white font-normal focus:outline-none hover:outline-none text-xl text-han-purple rounded-xl w-full border-0;
+  }
+
+  select {
+    @apply appearance-none bg-[url("/images/chevron-down.svg")] bg-no-repeat bg-[calc(100%_-_16px)_center];
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+
+  svg {
+    @apply fill-current;
+  }
+
+  hr {
+    @apply border-t-[3px] border-white w-full mb-9;
+  }
+}
+
+@layer component {
+  .aside-nav {
+    background-image: url("/images/bg-nav@2x.png");
+    background-size: 102px 138px;
+    background-position: 16px calc(100% - 100px);
+    background-repeat: no-repeat;
+  }
+
+  .toggle {
+    @apply flex items-center gap-3 text-han-purple;
+
+    label {
+      @apply bg-selago rounded-full w-9 h-5 relative cursor-pointer top-1;
+    }
+
+    input[type="checkbox"]:checked+label {
+      @apply bg-han-purple;
+    }
+
+    input[type="checkbox"]:checked+label div {
+      @apply translate-x-full;
+    }
+  }
+
+  ul.horizontal {
+    li {
+      @apply min-w-[98px] center leading-[45px];
+    }
+
+    li.active {
+      @apply bg-[url("/images/nav-active.svg")] bg-no-repeat bg-center;
+    }
+  }
+
+  .page-title {
+    @apply text-5xl text-han-purple font-body font-bold mb-8;
+  }
+
+  .action-bar {
+    @apply w-[calc(100%_-_305px)] bg-sezerac fixed bottom-0 right-0 p-6 pr-8 border-t-[3px] border-white flex justify-between items-center;
+  }
+
+  form:has(.action-bar) {
+    @apply pb-[60px];
+  }
+
+  .field {
+    @apply mb-5;
+
+    &:has(+ .button) {
+      @apply mb-10;
+    }
+
+    /* if a button follows the field, add more bottom margin */
+  }
+
+  .button {
+    @apply bg-han-purple hover:bg-medium-slate-blue text-unbleached-silk font-black px-8 font-display uppercase text-lg cursor-pointer h-12 center gap-2 whitespace-nowrap;
+
+    &[type="submit"] {
+      @apply h-[72px] text-2xl w-full;
+    }
+
+    &.secondary {
+      @apply bg-selago text-han-purple hover:bg-medium-slate-blue hover:text-unbleached-silk;
+    }
+
+    &.outline {
+      @apply bg-transparent border-[3px] border-han-purple text-han-purple hover:bg-han-purple hover:text-unbleached-silk;
+    }
+
+    &.outline.thin {
+      @apply border-[2px];
+    }
+
+    &.large {
+      @apply h-[72px] text-2xl w-full;
+    }
+
+    &.signup {
+      @apply bg-classic-rose text-han-purple hover:bg-unbleached-silk;
+    }
+  }
+
+  .form-header {
+    div {
+      @apply text-sm font-bold text-medium-slate-blue mb-2;
+    }
+
+    div:first-child {
+      @apply text-han-purple text-lg;
+    }
+  }
+
+  .dropdown {
+    &:before {
+      @apply content-[''] absolute block size-0 border-[16px] border-transparent right-[22px];
+    }
+
+    &.top:before {
+      @apply -top-[32px] border-b-han-purple;
+    }
+
+    &.bottom:before {
+      @apply -bottom-[32px] border-t-han-purple;
+    }
+
+    &:after {
+      @apply content-[''] absolute block size-0 border-[16px] border-transparent right-[22px];
+    }
+
+    &.top:after {
+      @apply border-b-fair-pink -top-[29px];
+    }
+
+    &.bottom:after {
+      @apply border-t-fair-pink -bottom-[29px];
+    }
+  }
+
+  footer {
+    ul {
+      li {
+        @apply mb-6;
+      }
+
+      a {
+        @apply text-white hover:text-han-purple font-bold;
+      }
+
+      &.legal li {
+        @apply mb-3;
+      }
+    }
+
+    ul.social-media {
+      li {
+        @apply mb-0;
+      }
+
+      a {
+        @apply text-unbleached-silk hover:text-han-purple;
+      }
+    }
+
+    h3 {
+      @apply font-bold text-xl text-unbleached-silk mb-5;
+    }
+
+    h3+ul {
+      li {
+        @apply !mb-4;
+      }
+
+      a {
+        @apply text-white font-normal;
+      }
+    }
+  }
+
+  /* stat card */
+  .stat-card {
+    @apply grid grid-cols-[3fr_1fr] gap-8 items-center;
+
+    h3 {
+      @apply text-xl font-bold;
+    }
+
+    .big-number {
+      @apply text-6xl font-black font-display;
+    }
+
+    .primary {
+      @apply text-han-purple;
+    }
+
+    .secondary {
+      @apply text-medium-slate-blue;
+    }
+  }
+
+}
+
+@layer page {
+
+  /* form index - form cards */
+  .form-grid {
+    @apply grid grid-cols-[1fr_100px_100px_100px_48px] gap-4 items-center;
+
+    div:not(:first-child) {
+      @apply text-center;
+    }
+  }
+
+  /* auth layout */
+  .auth-logo {
+    background-image: url("/images/bg-nav@2x.png");
+    background-size: 102px 138px;
+    background-position: left 270px;
+    background-repeat: no-repeat;
+    @apply pl-[50px];
+  }
+
+  .wavy-lines {
+    background-image: url('/images/wavy-lines.svg');
+    background-size: 170px 61px;
+    background-position: right 600px;
+    background-repeat: no-repeat;
+  }
+}
