@@ -40,8 +40,8 @@ const AccountBar = () => {
             >
               <DropdownMenu position="bottom">
                 <DropdownLink href="/admin/account"><Icon id="user" /> My Account</DropdownLink>
-                <DropdownLink href="/admin/settings">Settings</DropdownLink>
-                <DropdownLink href="/logout">Logout</DropdownLink>
+                <DropdownLink href="/admin/settings"><Icon id="gear" /> Settings</DropdownLink>
+                <DropdownLink href="/logout"><Icon id="logout" /> Logout</DropdownLink>
               </DropdownMenu>
             </motion.div>
           )}

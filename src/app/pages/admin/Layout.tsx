@@ -10,7 +10,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <Toaster />
       </div>
       <Aside />
-      <div className="pt-14 pb-[100px] h-screen overflow-y-auto">
+      <div className="h-screen overflow-y-auto">
         {children}
       </div>
     </div>

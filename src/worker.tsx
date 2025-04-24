@@ -17,6 +17,7 @@ import { userRoutes } from "@/app/pages/auth/routes";
 import { FormPage } from "./app/pages/form/FormPage";
 import { ListPage as ContactsListPage } from "./app/pages/admin/contacts/ListPage";
 import { DetailsPage as ContactsDetailsPage } from "./app/pages/admin/contacts/DetailsPage";
+import { ListPage as MessagesListPage } from "./app/pages/admin/messages/ListPage";
 export { SessionDurableObject } from "./session/durableObject";
 
 export type AppContext = {
@@ -75,12 +76,14 @@ export default defineApp([
     // marketing
     route("/", () => new Response("Hello, World!")),
 
-    // admin
-    route("/admin", [DashboardPage]),
+    // admin - password protected
+    route("/admin", () => new Response(null, { status: 302, headers: { Location: "/admin/dashboard" } })),
+    route("/admin/dashboard", [DashboardPage]),
     route("/admin/contacts", [ContactsListPage]),
     route("/admin/contacts/:id", [ContactsDetailsPage]),
+    route("/admin/messages", [MessagesListPage]),
 
-    // individual form page
+    // individual form page - not password protected
     route("/:id", [FormPage]),
 
     // auth

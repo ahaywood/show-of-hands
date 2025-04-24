@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap');
 
-
 @import "tailwindcss";
 
 @theme {
@@ -26,37 +25,22 @@
   --spacing-page: 32px;
 }
 
-@utility center {
-  @apply flex items-center justify-center;
-}
+@utility center { @apply flex items-center justify-center; }
 
-@utility z-dots {
-  @apply z-[9000];
-}
+@utility z-dots { @apply z-[9000]; }
+@utility z-menu { @apply z-[9005]; }
+@utility z-overlay { @apply z-[99990]; }
+@utility z-modal { @apply z-[99999]; }
 
-@utility z-menu {
-  @apply z-[9005];
-}
+@utility action-buttons { @apply flex items-center gap-3; }
 
-@utility z-overlay {
-  @apply z-[99990];
-}
+@utility card { @apply rounded-3xl py-6 px-8; }
 
-@utility z-modal {
-  @apply z-[99999];
-}
+@utility page-grid { @apply grid grid-cols-12 gap-5; }
 
-@utility action-buttons {
-  @apply flex items-center gap-3;
-}
+@utility page-top { @apply pt-14; }
+@utility page-bottom { @apply pb-[100px]; }
 
-@utility card {
-  @apply rounded-3xl py-6 px-8;
-}
-
-@utility page-grid {
-  @apply grid grid-cols-12 gap-5;
-}
 
 @layer base, component, page;
 
