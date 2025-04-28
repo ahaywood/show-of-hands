@@ -1,5 +1,5 @@
 import { defineApp, ErrorResponse } from "@redwoodjs/sdk/worker";
-import { route, render, prefix, index } from "@redwoodjs/sdk/router";
+import { route, render, prefix, index, Route } from "@redwoodjs/sdk/router";
 import { Document } from "@/app/Document";
 import { setCommonHeaders } from "@/app/headers";
 import { sessions, setupSessionStore } from "./session/store";
@@ -30,11 +30,16 @@ import { NewPage as FormsNewPage } from "@/app/pages/admin/forms/NewPage";
 import { SettingsPage as FormsSettingsPage } from "@/app/pages/admin/forms/SettingsPage";
 import { StatsPage as FormsStatsPage } from "@/app/pages/admin/forms/StatsPage";
 import { EditPage as FormsEditPage } from "@/app/pages/admin/forms/EditPage";
+import { MarkdownPage } from "@/app/pages/legal/MarkdownPage";
+import termsContent from "@/app/pages/legal/terms.md?raw";
+
+
 export { SessionDurableObject } from "./session/durableObject";
 
 export type AppContext = {
   session: Session | null;
   user: User | null;
+  content?: string;
 };
 
 /**
@@ -50,6 +55,11 @@ const isAuthenticated = ({ ctx }: RequestInfo) => {
     });
   }
 }
+
+const showMarkdown = [({ ctx }: RequestInfo) => {
+  ctx.content = termsContent;
+  return
+}, MarkdownPage]
 
 /**
  * The Application
@@ -117,16 +127,17 @@ export default defineApp([
 
     // legal
     prefix("/legal", [
-      route("/terms", () => "terms"),
-      route("/privacy", () => "privacy"),
-      route("/disclaimers", () => "disclaimers"),
+      route("/terms", [...showMarkdown]),
+      route("/privacy", Home),
+      route("/disclaimers", Home),
     ]),
+
+    // auth
+    [...userRoutes],
 
     // individual form page - not password protected
     route("/:id", [FormPage]),
 
-    // auth
-    [...userRoutes],
     route("/404", ErrorPage),
   ]),
 ]);

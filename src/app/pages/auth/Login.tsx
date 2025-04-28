@@ -61,6 +61,7 @@ export function Login() {
 
   return (
     <>
+      <title>Login | Show of Hands</title>
       <input
         type="text"
         value={username}
