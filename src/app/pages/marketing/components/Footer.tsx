@@ -10,7 +10,7 @@ const Footer = () => {
     <footer className="bg-tiffany-blue w-full px-page py-[72px]">
       <div className="grid grid-cols-[400px_300px_1fr_1fr]">
         <div>
-          <Logo showBg={false} width={263} height={166} />
+          {/* <Logo showBg={false} width={263} height={166} /> */}
 
           <div className="pb-9 pl-10"><SocialMedia /></div>
 
@@ -74,7 +74,7 @@ const Footer = () => {
       </div>
       <div>
         <p className="text-sm italic text-white">
-          Copyright&copy; {getCurrentYear()}. <a href="https://ahhacreative.com" target="_blank" rel="noopener noreferrer">Ah Ha Creative, LLC</a>. All Rights Reserved.
+          Copyright&copy; <span data-testid="current-year">{getCurrentYear()}</span>. <a href="https://ahhacreative.com" target="_blank" rel="noopener noreferrer">Ah Ha Creative, LLC</a>. All Rights Reserved.
         </p>
       </div>
     </footer>
