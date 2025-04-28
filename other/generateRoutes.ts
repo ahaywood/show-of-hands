@@ -9,6 +9,11 @@ interface RouteMatch {
   endIndex: number;
 }
 
+interface ImportInfo {
+  originalName?: string;
+  path: string;
+}
+
 async function findMatchingBracket(content: string, startIndex: number): Promise<number> {
   let count = 1;
   let i = startIndex;
@@ -22,6 +27,55 @@ async function findMatchingBracket(content: string, startIndex: number): Promise
   return i - 1;
 }
 
+async function findImportedRoutes(content: string): Promise<string[]> {
+  const importRegex = /import\s*{\s*([^}]+)\s*}\s*from\s*["']([^"']+)["']/g;
+  const spreadRegex = /\[\s*\.\.\.(\w+)\s*\]/g;
+  const importedRoutes: string[] = [];
+  let match;
+
+  // Find all imports
+  const imports = new Map<string, ImportInfo>();
+  while ((match = importRegex.exec(content)) !== null) {
+    const [, importNames, importPath] = match;
+    const names = importNames.split(',').map(n => n.trim());
+
+    for (const name of names) {
+      if (name.includes(' as ')) {
+        const [originalName, alias] = name.split(' as ').map(n => n.trim());
+        imports.set(alias, { originalName, path: importPath });
+      } else {
+        imports.set(name, { path: importPath });
+      }
+    }
+  }
+
+  // Find spread operators and process imported files
+  while ((match = spreadRegex.exec(content)) !== null) {
+    const variableName = match[1];
+    const importInfo = imports.get(variableName);
+
+    if (importInfo) {
+      // Convert relative path to absolute
+      let absolutePath = importInfo.path;
+      if (importInfo.path.startsWith('@/')) {
+        absolutePath = path.join(process.cwd(), 'src', importInfo.path.slice(2));
+      } else if (importInfo.path.startsWith('./') || importInfo.path.startsWith('../')) {
+        absolutePath = path.join(path.dirname(process.cwd()), importInfo.path);
+      }
+
+      try {
+        const importedContent = await fs.readFile(absolutePath + '.ts', 'utf-8');
+        const newRoutes = await extractRoutesFromContent(importedContent);
+        importedRoutes.push(...newRoutes);
+      } catch (error) {
+        console.warn(`Warning: Could not process imported routes from ${importInfo.path}`);
+      }
+    }
+  }
+
+  return importedRoutes;
+}
+
 async function extractRoutesFromContent(content: string, prefix = ''): Promise<string[]> {
   const routes: string[] = [];
   const routeRegex = /route\("([^"]+)"/g;
@@ -29,6 +83,10 @@ async function extractRoutesFromContent(content: string, prefix = ''): Promise<s
   const prefixRegex = /prefix\("([^"]+)",\s*\[/g;
 
   let match;
+
+  // Process imported routes first
+  const importedRoutes = await findImportedRoutes(content);
+  routes.push(...importedRoutes);
 
   // Find all prefixed route blocks
   while ((match = prefixRegex.exec(content)) !== null) {

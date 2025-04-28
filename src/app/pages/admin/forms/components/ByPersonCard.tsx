@@ -11,7 +11,7 @@ const ByPersonCard = ({ person, submissionDate, slot }: {
 }, submissionDate: string, slot: string }) => {
   return (
     <div className="bg-white rounded-lg py-4 pl-5 pr-8 flex items-center gap-6 mb-3">
-      <Avatar src={person.avatar} alt={`${person.firstName} ${person.lastName}`} size={62} />
+      <Avatar src="/images/placeholder.jpg" alt={`${person.firstName} ${person.lastName}`} size={62} />
       <div className="flex-1">
         <h3 className="text-han-purple text-3xl font-normal mb-0 pb-0 leading-none">{person.firstName} {person.lastName}</h3>
         <p className="text-han-purple text-base mb-0 pb-0 leading-none">{person.email}</p>

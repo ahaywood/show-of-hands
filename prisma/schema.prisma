@@ -15,6 +15,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Chat {
+  id        String        @id @default(uuid())
+  messages  ChatMessage[]
+  users     ChatUser[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+model ChatMessage {
+  id        String   @id @default(uuid())
+  message   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  chatId    String
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+}
+
+model ChatUser {
+  id     String @id @default(uuid())
+  chatId String
+  chat   Chat   @relation(fields: [chatId], references: [id])
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
 model Credential {
   id           String   @id @default(uuid()) // Internal DB ID
   userId       String   @unique // Every credential is linked to a specific user
@@ -98,16 +125,27 @@ model Role {
 }
 
 model User {
-  id        String   @id @default(uuid()) // User ID (UUID-based)
-  username  String   @unique
-  createdAt DateTime @default(now())
-  firstName String
-  lastName  String
-  avatar    String?
-  email     String   @unique
-  forms     Form[]
-  roleId    Int
-  role      Role     @relation(fields: [roleId], references: [id])
+  id          String        @id @default(uuid()) // User ID (UUID-based)
+  username    String        @unique
+  createdAt   DateTime      @default(now())
+  firstName   String
+  lastName    String
+  avatar      String?
+  email       String        @unique
+  twitter     String?
+  instagram   String?
+  facebook    String?
+  linkedin    String?
+  youtube     String?
+  tiktok      String?
+  bluesky     String?
+  threads     String?
+  bio         String?
+  roleId      Int
+  role        Role          @relation(fields: [roleId], references: [id])
+  forms       Form[]
+  ChatUser    ChatUser[]
+  ChatMessage ChatMessage[]
 
   credentials Credential[] // Relationship: One user can have many credentials
 }

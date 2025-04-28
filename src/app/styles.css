@@ -7,16 +7,14 @@
   --color-tiffany-blue: #02baad;
   --color-han-purple: #3f16d3;
   --color-medium-slate-blue: #8365f0;
-  --color-sezerac: #ffefe2;
-  /* background: light peach color */
+  --color-sezerac: #ffefe2; /* background: light peach color */
   --color-peach-puff: #ffd7ba;
   --color-unbleached-silk: #ffe0c8;
   --color-lumber: #ffe3ce;
   --color-sea-shell: #fff6ee;
   --color-coral-red: #fe4345;
   --color-fair-pink: #ffedef;
-  --color-selago: #ebdbe5;
-  /* light purple */
+  --color-selago: #ebdbe5; /* light purple */
   --color-classic-rose: #f3c4da;
 
   --font-display: 'Rubik', sans-serif;
@@ -138,141 +136,63 @@
     @apply pb-[60px];
   }
 
-  .field {
-    @apply mb-5;
-
-    &:has(+ .button) {
-      @apply mb-10;
-    }
-
+  .field { @apply mb-5;
+    &:has(+ .button) { @apply mb-10; }
     /* if a button follows the field, add more bottom margin */
   }
 
   .button {
     @apply bg-han-purple hover:bg-medium-slate-blue text-unbleached-silk font-black px-8 font-display uppercase text-lg cursor-pointer h-12 center gap-2 whitespace-nowrap;
-
-    &[type="submit"] {
-      @apply h-[72px] text-2xl w-full;
-    }
-
-    &.secondary {
-      @apply bg-selago text-han-purple hover:bg-medium-slate-blue hover:text-unbleached-silk;
-    }
-
-    &.outline {
-      @apply bg-transparent border-[3px] border-han-purple text-han-purple hover:bg-han-purple hover:text-unbleached-silk;
-    }
-
-    &.outline.thin {
-      @apply border-[2px];
-    }
-
-    &.large {
-      @apply h-[72px] text-2xl w-full;
-    }
-
-    &.signup {
-      @apply bg-classic-rose text-han-purple hover:bg-unbleached-silk;
-    }
+    &[type="submit"] { @apply h-[72px] text-2xl w-full; }
+    &.secondary { @apply bg-selago text-han-purple hover:bg-medium-slate-blue hover:text-unbleached-silk; }
+    &.outline { @apply bg-transparent border-[3px] border-han-purple text-han-purple hover:bg-han-purple hover:text-unbleached-silk; }
+    &.outline.thin { @apply border-[2px]; }
+    &.large { @apply h-[72px] text-2xl w-full; }
+    &.signup { @apply bg-classic-rose text-han-purple hover:bg-unbleached-silk; }
   }
 
   .form-header {
-    div {
-      @apply text-sm font-bold text-medium-slate-blue mb-2;
-    }
-
-    div:first-child {
-      @apply text-han-purple text-lg;
-    }
+    div { @apply text-sm font-bold text-medium-slate-blue mb-2; }
+    div:first-child { @apply text-han-purple text-lg; }
   }
 
   .dropdown {
-    &:before {
-      @apply content-[''] absolute block size-0 border-[16px] border-transparent right-[22px];
-    }
-
-    &.top:before {
-      @apply -top-[32px] border-b-han-purple;
-    }
-
-    &.bottom:before {
-      @apply -bottom-[32px] border-t-han-purple;
-    }
-
-    &:after {
-      @apply content-[''] absolute block size-0 border-[16px] border-transparent right-[22px];
-    }
-
-    &.top:after {
-      @apply border-b-fair-pink -top-[29px];
-    }
-
-    &.bottom:after {
-      @apply border-t-fair-pink -bottom-[29px];
-    }
+    &:before { @apply content-[''] absolute block size-0 border-[16px] border-transparent right-[22px]; }
+    &.top:before { @apply -top-[32px] border-b-han-purple; }
+    &.bottom:before { @apply -bottom-[32px] border-t-han-purple; }
+    &:after { @apply content-[''] absolute block size-0 border-[16px] border-transparent right-[22px]; }
+    &.top:after { @apply border-b-fair-pink -top-[29px]; }
+    &.bottom:after { @apply border-t-fair-pink -bottom-[29px]; }
   }
 
   footer {
     ul {
-      li {
-        @apply mb-6;
-      }
-
-      a {
-        @apply text-white hover:text-han-purple font-bold;
-      }
-
-      &.legal li {
-        @apply mb-3;
-      }
+      li { @apply mb-6; }
+      a { @apply text-white hover:text-han-purple font-bold; }
+      &.legal li { @apply mb-3; }
     }
 
     ul.social-media {
-      li {
-        @apply mb-0;
-      }
-
-      a {
-        @apply text-unbleached-silk hover:text-han-purple;
-      }
+      li { @apply mb-0; }
+      a { @apply text-unbleached-silk hover:text-han-purple; }
     }
 
-    h3 {
-      @apply font-bold text-xl text-unbleached-silk mb-5;
-    }
+    h3 { @apply font-bold text-xl text-unbleached-silk mb-5; }
 
     h3+ul {
-      li {
-        @apply !mb-4;
-      }
-
-      a {
-        @apply text-white font-normal;
-      }
+      li { @apply !mb-4; }
+      a { @apply text-white font-normal; }
     }
   }
 
   /* stat card */
   .stat-card {
     @apply grid grid-cols-[3fr_1fr] gap-8 items-center;
-
-    h3 {
-      @apply text-xl font-bold;
-    }
-
-    .big-number {
-      @apply text-6xl font-black font-display;
-    }
-
-    .primary {
-      @apply text-han-purple;
-    }
-
-    .secondary {
-      @apply text-medium-slate-blue;
-    }
+    h3 { @apply text-xl font-bold; }
+    .big-number { @apply text-6xl font-black font-display; }
+    .primary { @apply text-han-purple; }
+    .secondary { @apply text-medium-slate-blue; }
   }
-
 }
 
 @layer page {
@@ -280,10 +200,7 @@
   /* form index - form cards */
   .form-grid {
     @apply grid grid-cols-[1fr_100px_100px_100px_48px] gap-4 items-center;
-
-    div:not(:first-child) {
-      @apply text-center;
-    }
+    div:not(:first-child) { @apply text-center; }
   }
 
   /* auth layout */
@@ -301,4 +218,46 @@
     background-position: right 600px;
     background-repeat: no-repeat;
   }
+
+  /* messages page */
+  .profile-header {
+    @apply sticky top-0;
+    &:sticky { @apply bg-red-500 z-50; }
+  }
+
+  @keyframes scale-profile-header {
+    0% {
+      background-color: transparent;
+
+    }
+    2% {
+      background-color: red;
+    }
+    100% {
+      background-color: red;
+    }
+  }
+
+  .profile-header {
+    animation: scale-profile-header linear;
+    animation-timeline: scroll()
+  }
+
+  @keyframes fade {
+    0% {
+      opacity: 1;
+    }
+    2% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .profile-header .social-and-bio {
+    animation: fade linear;
+    animation-timeline: scroll()
+  }
+
 }

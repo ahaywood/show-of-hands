@@ -2,7 +2,7 @@ import { Avatar } from '@/app/components/Avatar'
 import { Checkbox } from '@/app/components/Checkbox'
 import React from 'react'
 
-const FormCard = () => {
+const ByFormCard = () => {
   return (
     <div className="bg-white rounded-lg pt-4 pb-10 pl-5 pr-8">
       <div className="flex items-center justify-between">
@@ -21,4 +21,4 @@ const FormCard = () => {
   )
 }
 
-export { FormCard }
+export { ByFormCard }

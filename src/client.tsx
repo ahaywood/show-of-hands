@@ -1,3 +1,7 @@
-import { initClient } from "@redwoodjs/sdk/client";
+// import { initClient } from "@redwoodjs/sdk/client";
+import { initRealtimeClient } from "@redwoodjs/sdk/realtime/client";
 
-initClient();
+// initClient();
+initRealtimeClient({
+  key: window.location.pathname, // Used to group related clients
+});

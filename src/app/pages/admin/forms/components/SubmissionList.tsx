@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import React, { useState } from 'react'
 import { ByPersonCard } from './ByPersonCard'
 import { Accordion } from '@/app/components/Accordion'
-import { FormCard } from './FormCard'
+import { FormCard } from './ByFormCard'
 
 
 const SubmissionList = () => {

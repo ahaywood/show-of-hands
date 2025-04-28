@@ -1,10 +1,12 @@
 const Avatar = ({ src = '', alt, size = 60, shape = 'circle', border = false }:
   { src?: string, alt: string, size?: number, shape?: 'circle' | 'square', border?: boolean }) => {
   if (!src) return (
-    <div className={`bg-fair-pink w-12 h-12 center
+    <div className={`bg-tiffany-blue w-12 h-12 center
       ${shape === 'square' ? 'rounded-[6px]' : 'rounded-full '}
-      ${border ? 'border-1 border-white' : ''}`}>
-      <span className="text-han-purple text-2xl font-bold">{alt.slice(0, 2)}</span>
+      ${border ? 'border-1 border-white' : ''}`}
+      style={{ width: size, height: size }}
+    >
+      <span className="text-white text-2xl font-bold">{alt.slice(0, 2)}</span>
     </div>
   )
 
@@ -12,7 +14,9 @@ const Avatar = ({ src = '', alt, size = 60, shape = 'circle', border = false }:
     <div>
       <img src={src} alt={alt} className={`w-full h-full object-cover
         ${shape === 'square' ? 'rounded-[6px]' : 'rounded-full '}
-        ${border ? 'border-1 border-white' : ''}`} width={size} height={size} />
+        ${border ? 'border-1 border-white' : ''}`}
+        style={{ width: size, height: size }}
+      />
     </div>
   )
 }
