@@ -56,5 +56,8 @@
       "database_name": "show-of-hands",
       "database_id": "6397a8f3-cd74-4f0c-8aa5-16083dd61afa"
     }
-  ]
+  ],
+  "browser": {
+    "binding": "MYBROWSER"
+  }
 }
