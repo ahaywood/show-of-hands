@@ -81,7 +81,7 @@ const ListPage = async ({ params }: RequestInfo) => {
               border={true}
             />
             <div className="flex-1">
-              <MessageForm />
+              <MessageForm chatId={chatId} />
             </div>
           </div>
         </div>

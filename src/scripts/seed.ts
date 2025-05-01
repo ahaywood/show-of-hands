@@ -70,24 +70,24 @@ export default defineScript(async ({ env }) => {
   // Create chat rooms
   const chat1 = await db.chat.create({
     data: {
-      id: "chat1",
+      id: "1",
     },
   });
 
   const chat2 = await db.chat.create({
     data: {
-      id: "chat2",
+      id: "2",
     },
   });
 
   // Add users to chats
   await db.chatUser.createMany({
     data: [
-      { id: "cu1", chatId: chat1.id, userId: "1" },
-      { id: "cu2", chatId: chat1.id, userId: "2" },
-      { id: "cu3", chatId: chat2.id, userId: "1" },
-      { id: "cu4", chatId: chat2.id, userId: "2" },
-      { id: "cu5", chatId: chat2.id, userId: "3" },
+      { id: "1", chatId: chat1.id, userId: "1" },
+      { id: "2", chatId: chat1.id, userId: "2" },
+      { id: "3", chatId: chat2.id, userId: "1" },
+      { id: "4", chatId: chat2.id, userId: "2" },
+      { id: "5", chatId: chat2.id, userId: "3" },
     ],
   });
 
@@ -95,42 +95,42 @@ export default defineScript(async ({ env }) => {
   await db.chatMessage.createMany({
     data: [
       {
-        id: "cm1",
+        id: "1",
         message: "Hello! How's everyone doing today?",
         chatId: chat1.id,
         userId: "1",
         createdAt: new Date(Date.now() - 3600000 * 24), // 24 hours ago
       },
       {
-        id: "cm2",
+        id: "2",
         message: "I'm doing well, thanks for asking!",
         chatId: chat1.id,
         userId: "2",
         createdAt: new Date(Date.now() - 3500000 * 24), // 23.5 hours ago
       },
       {
-        id: "cm3",
+        id: "3",
         message: "What's on the agenda for today?",
         chatId: chat1.id,
         userId: "1",
         createdAt: new Date(Date.now() - 3400000 * 24), // 23 hours ago
       },
       {
-        id: "cm4",
+        id: "4",
         message: "Hey team, welcome to our group chat!",
         chatId: chat2.id,
         userId: "1",
         createdAt: new Date(Date.now() - 7200000), // 2 hours ago
       },
       {
-        id: "cm5",
+        id: "5",
         message: "Thanks for setting this up!",
         chatId: chat2.id,
         userId: "3",
         createdAt: new Date(Date.now() - 7000000), // 1.9 hours ago
       },
       {
-        id: "cm6",
+        id: "6",
         message: "Looking forward to collaborating with everyone.",
         chatId: chat2.id,
         userId: "2",
